@@ -7,12 +7,19 @@ using System.Web.Mvc;
 
 namespace Dashboard.Controllers
 {
+    [RoutePrefix("Home")]
     public class HomeController : Controller
     {
         private IDashboardService _dashboard;
         public HomeController(IDashboardService dashboard)
         {
            // _dashboard = dashboard;
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View("Login");
         }
 
         public ActionResult Index()
