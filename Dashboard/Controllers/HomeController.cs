@@ -40,6 +40,10 @@ namespace Dashboard.Controllers
 
         public ActionResult Index()
         {
+            var tools=_dashboard.GetToolBarByNo("20000390");
+
+            ViewBag.Tools = tools;
+
             return View();
         }
 
