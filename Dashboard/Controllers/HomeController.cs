@@ -7,13 +7,21 @@ using System.Web.Mvc;
 
 namespace Dashboard.Controllers
 {
+    public class user
+    {
+        public string empno { get; set; }
+        public string password { get; set; }
+    }
+
     [RoutePrefix("Home")]
     public class HomeController : Controller
     {
         private IDashboardService _dashboard;
         public HomeController(IDashboardService dashboard)
         {
-           // _dashboard = dashboard;
+            
+            _dashboard = dashboard;
+
         }
 
         [HttpGet]
@@ -21,6 +29,14 @@ namespace Dashboard.Controllers
         {
             return View("Login");
         }
+
+        [HttpPost]
+        public ActionResult PostLogin(user user)
+        {
+
+            return RedirectToAction("Index");
+        }
+
 
         public ActionResult Index()
         {

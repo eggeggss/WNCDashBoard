@@ -33,7 +33,7 @@ namespace DAL
 
     }
 
-    public interface IItemRepositry: IRepository<Item>
+    public interface IItemRepository : IRepository<Item>
     {
 
     }

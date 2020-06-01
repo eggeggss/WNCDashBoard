@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace DAL
 {
 
-    public class ItemRepositry : IItemRepositry
+    public class ItemRepository : IItemRepository
     {
 
         public EFAdapter _adapter;
 
-        public ItemRepositry()
+        public ItemRepository()
         {
             _adapter = new EFAdapter();
 
@@ -30,7 +30,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.dt_update = DateTime.Now;
                         t.stat_void = 1;
@@ -58,7 +58,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         return db.Item.Where(e => e.item_name == name
                         && e.stat_void == 0).FirstOrDefault();
@@ -83,7 +83,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         return db.Item.Where(e =>
                         e.stat_void == 0).ToList();
@@ -108,7 +108,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
                         t.dt_create = DateTime.Now;
@@ -137,7 +137,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
                         t.dt_update = DateTime.Now;
@@ -178,7 +178,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 1;
                         db.Entry(t).State = System.Data.Entity.EntityState.Modified;
@@ -205,9 +205,9 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
 
-                        return db.ItemGroupRel.Where(e =>  e.stat_void == 0).FirstOrDefault();
+
+                        return db.ItemGroupRel.Where(e => e.stat_void == 0).FirstOrDefault();
 
                     }
                 });
@@ -229,7 +229,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         return db.ItemGroupRel.Where(e =>
                         e.stat_void == 0).ToList();
@@ -254,7 +254,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
                         db.Entry(t).State = System.Data.Entity.EntityState.Added;
@@ -282,10 +282,10 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
-                      
+
                         db.Entry(t).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
                         return true;
@@ -321,7 +321,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 1;
                         db.Entry(t).State = System.Data.Entity.EntityState.Modified;
@@ -347,7 +347,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         return db.Group.Where(e => e.stat_void == 0).FirstOrDefault();
 
@@ -371,7 +371,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         return db.Group.Where(e =>
                         e.stat_void == 0).ToList();
@@ -396,7 +396,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
                         db.Entry(t).State = System.Data.Entity.EntityState.Added;
@@ -424,7 +424,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
 
@@ -444,7 +444,7 @@ namespace DAL
         }
     }
 
-    
+
     public class TabTemplateRepository : ITabTemplateRepository
     {
         public EFAdapter _adapter;
@@ -463,7 +463,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 1;
                         db.Entry(t).State = System.Data.Entity.EntityState.Modified;
@@ -489,7 +489,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         return db.TabTemplate.Where(e => e.stat_void == 0).FirstOrDefault();
 
@@ -513,7 +513,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         return db.TabTemplate.Where(e =>
                         e.stat_void == 0).ToList();
@@ -538,7 +538,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
                         db.Entry(t).State = System.Data.Entity.EntityState.Added;
@@ -566,7 +566,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
 
@@ -595,7 +595,7 @@ namespace DAL
             _adapter = new EFAdapter();
         }
 
-        
+
         public bool Delete(Users t)
         {
             try
@@ -605,7 +605,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
                         t.stat_void = 1;
                         db.Entry(t).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
@@ -630,7 +630,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         return db.Users.Where(e => e.stat_void == 0).FirstOrDefault();
 
@@ -653,7 +653,7 @@ namespace DAL
                 {
                     using (var db = new Dashboard1Entities())
                     {
-                        
+
                         return db.Users.Where(e =>
                         e.stat_void == 0).ToList();
 
@@ -677,7 +677,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
                         db.Entry(t).State = System.Data.Entity.EntityState.Added;
@@ -705,7 +705,7 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
+
 
                         t.stat_void = 0;
 
@@ -740,11 +740,8 @@ namespace DAL
             {
                 Func<bool> func = new Func<bool>(() =>
                 {
-
                     using (var db = new Dashboard1Entities())
                     {
-                         
-
                         t.stat_void = 1;
                         db.Entry(t).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
@@ -766,11 +763,8 @@ namespace DAL
             {
                 Func<UsersGroupsRel> func = new Func<UsersGroupsRel>(() =>
                 {
-
                     using (var db = new Dashboard1Entities())
                     {
-                         
-
                         return db.UsersGroupsRel.Where(e => e.stat_void == 0).FirstOrDefault();
 
                     }
@@ -793,11 +787,8 @@ namespace DAL
 
                     using (var db = new Dashboard1Entities())
                     {
-                         
-
                         return db.UsersGroupsRel.Where(e =>
                         e.stat_void == 0).ToList();
-
                     }
                 });
 
@@ -815,16 +806,12 @@ namespace DAL
             {
                 Func<bool> func = new Func<bool>(() =>
                 {
-
                     using (var db = new Dashboard1Entities())
                     {
-                         
-
                         t.stat_void = 0;
                         db.Entry(t).State = System.Data.Entity.EntityState.Added;
                         db.SaveChanges();
                         return true;
-
                     }
                 });
 
@@ -843,11 +830,8 @@ namespace DAL
             {
                 Func<bool> func = new Func<bool>(() =>
                 {
-
                     using (var db = new Dashboard1Entities())
                     {
-                         
-
                         t.stat_void = 0;
 
                         db.Entry(t).State = System.Data.Entity.EntityState.Modified;

@@ -2,3 +2,9 @@ C:\Users\20000390\documents\visual studio 2015\Projects\Dashboard\Model\bin\Debu
 C:\Users\20000390\documents\visual studio 2015\Projects\Dashboard\Model\bin\Debug\Model.pdb
 C:\Users\20000390\documents\visual studio 2015\Projects\Dashboard\Model\obj\Debug\Model.dll
 C:\Users\20000390\documents\visual studio 2015\Projects\Dashboard\Model\obj\Debug\Model.pdb
+X:\WNCDashBoard\Model\bin\Debug\Model.dll
+X:\WNCDashBoard\Model\bin\Debug\Model.pdb
+X:\WNCDashBoard\Model\obj\Debug\Model.csprojAssemblyReference.cache
+X:\WNCDashBoard\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+X:\WNCDashBoard\Model\obj\Debug\Model.dll
+X:\WNCDashBoard\Model\obj\Debug\Model.pdb
