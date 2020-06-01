@@ -1,0 +1,4 @@
+C:\Users\20000390\documents\visual studio 2015\Projects\Dashboard\Model\bin\Debug\Model.dll
+C:\Users\20000390\documents\visual studio 2015\Projects\Dashboard\Model\bin\Debug\Model.pdb
+C:\Users\20000390\documents\visual studio 2015\Projects\Dashboard\Model\obj\Debug\Model.dll
+C:\Users\20000390\documents\visual studio 2015\Projects\Dashboard\Model\obj\Debug\Model.pdb

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="id_group" />
+    </Key>
+    <Property Name="id_group" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group_name" Type="nvarchar" MaxLength="1024" />
+    <Property Name="dt_create" Type="datetime" />
+    <Property Name="dt_update" Type="datetime" />
+    <Property Name="stat_void" Type="int" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="id_item" />
+    </Key>
+    <Property Name="id_item" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="item_name" Type="nvarchar" MaxLength="1024" />
+    <Property Name="icon_url" Type="nvarchar(max)" />
+    <Property Name="report_url" Type="nvarchar(max)" />
+    <Property Name="size" Type="int" />
+    <Property Name="stat_void" Type="int" />
+    <Property Name="dt_create" Type="datetime" />
+    <Property Name="dt_update" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ItemGroupRel">
+    <Key>
+      <PropertyRef Name="id_item_group" />
+    </Key>
+    <Property Name="id_item_group" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_group" Type="int" />
+    <Property Name="id_item" Type="int" />
+    <Property Name="stat_void" Type="int" />
+  </EntityType>
+  <EntityType Name="TabTemplate">
+    <Key>
+      <PropertyRef Name="id_tab" />
+    </Key>
+    <Property Name="id_tab" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_group" Type="int" />
+    <Property Name="tab_name" Type="nvarchar" MaxLength="1024" />
+    <Property Name="dt_create" Type="datetime" />
+    <Property Name="dt_update" Type="datetime" />
+    <Property Name="stat_void" Type="int" />
+    <Property Name="htmltemplate" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="empno" Type="nvarchar" MaxLength="100" />
+    <Property Name="empname" Type="nvarchar" MaxLength="100" />
+    <Property Name="isadmin" Type="int" />
+    <Property Name="htmltemplate" Type="nvarchar(max)" />
+    <Property Name="dt_create" Type="datetime" />
+    <Property Name="dt_update" Type="datetime" />
+    <Property Name="stat_void" Type="int" />
+  </EntityType>
+  <EntityType Name="UsersGroupsRel">
+    <Key>
+      <PropertyRef Name="id_user_rel" />
+    </Key>
+    <Property Name="id_user_rel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_user" Type="int" />
+    <Property Name="id_group" Type="int" />
+    <Property Name="stat_void" Type="int" />
+    <Property Name="dt_create" Type="datetime" />
+    <Property Name="dt_update" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemGroupRel" EntityType="Self.ItemGroupRel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TabTemplate" EntityType="Self.TabTemplate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsersGroupsRel" EntityType="Self.UsersGroupsRel" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Dashboard1Entities">
+    <EntitySetMapping Name="Group">
+      <EntityTypeMapping TypeName="Database1Model.Group">
+        <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="id_group" ColumnName="id_group" />
+          <ScalarProperty Name="group_name" ColumnName="group_name" />
+          <ScalarProperty Name="dt_create" ColumnName="dt_create" />
+          <ScalarProperty Name="dt_update" ColumnName="dt_update" />
+          <ScalarProperty Name="stat_void" ColumnName="stat_void" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Item">
+      <EntityTypeMapping TypeName="Database1Model.Item">
+        <MappingFragment StoreEntitySet="Item">
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="item_name" ColumnName="item_name" />
+          <ScalarProperty Name="icon_url" ColumnName="icon_url" />
+          <ScalarProperty Name="report_url" ColumnName="report_url" />
+          <ScalarProperty Name="size" ColumnName="size" />
+          <ScalarProperty Name="stat_void" ColumnName="stat_void" />
+          <ScalarProperty Name="dt_create" ColumnName="dt_create" />
+          <ScalarProperty Name="dt_update" ColumnName="dt_update" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemGroupRel">
+      <EntityTypeMapping TypeName="Database1Model.ItemGroupRel">
+        <MappingFragment StoreEntitySet="ItemGroupRel">
+          <ScalarProperty Name="id_item_group" ColumnName="id_item_group" />
+          <ScalarProperty Name="id_group" ColumnName="id_group" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="stat_void" ColumnName="stat_void" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TabTemplate">
+      <EntityTypeMapping TypeName="Database1Model.TabTemplate">
+        <MappingFragment StoreEntitySet="TabTemplate">
+          <ScalarProperty Name="id_tab" ColumnName="id_tab" />
+          <ScalarProperty Name="id_group" ColumnName="id_group" />
+          <ScalarProperty Name="tab_name" ColumnName="tab_name" />
+          <ScalarProperty Name="dt_create" ColumnName="dt_create" />
+          <ScalarProperty Name="dt_update" ColumnName="dt_update" />
+          <ScalarProperty Name="stat_void" ColumnName="stat_void" />
+          <ScalarProperty Name="htmltemplate" ColumnName="htmltemplate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Database1Model.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="empno" ColumnName="empno" />
+          <ScalarProperty Name="empname" ColumnName="empname" />
+          <ScalarProperty Name="isadmin" ColumnName="isadmin" />
+          <ScalarProperty Name="htmltemplate" ColumnName="htmltemplate" />
+          <ScalarProperty Name="dt_create" ColumnName="dt_create" />
+          <ScalarProperty Name="dt_update" ColumnName="dt_update" />
+          <ScalarProperty Name="stat_void" ColumnName="stat_void" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersGroupsRel">
+      <EntityTypeMapping TypeName="Database1Model.UsersGroupsRel">
+        <MappingFragment StoreEntitySet="UsersGroupsRel">
+          <ScalarProperty Name="id_user_rel" ColumnName="id_user_rel" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_group" ColumnName="id_group" />
+          <ScalarProperty Name="stat_void" ColumnName="stat_void" />
+          <ScalarProperty Name="dt_create" ColumnName="dt_create" />
+          <ScalarProperty Name="dt_update" ColumnName="dt_update" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

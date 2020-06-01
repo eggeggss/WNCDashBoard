@@ -1,0 +1,106 @@
+﻿
+-------------------User------------------------
+
+drop table Users,UsersGroupsRel,[Group]
+
+
+create table dbo.Users(
+   id_user int identity(1,1),
+   empno int null,
+   empname int null,
+   isadmin int default(0),
+   htmltemplate nvarchar(max) null,
+   dt_create datetime  default(getdate()),
+   dt_update datetime null,
+   stat_void int
+)
+
+
+create table dbo.UsersGroupsRel(
+  id_user_rel int identity(1,1),
+  id_user int ,
+  id_gorup int ,
+  stat_void int default(0),
+  dt_create datetime default(getdate()),
+  dt_update datetime null
+)
+
+--mfg/dis
+create table dbo.[Group]
+(
+  id_group int identity(1,1),
+  group_name nvarchar(1024) null,
+  dt_create datetime  default(getdate()),
+  dt_update datetime null,
+  stat_void int  default(0)
+)
+
+
+-------------------TabTemplate------------------------
+
+
+drop table Users,UsersGroupsRel,[Group]
+
+
+create table dbo.TabTemplate(
+  id_tab int identity(1,1),
+  id_group int,
+  tab_name nvarchar(1024) null,
+  dt_create datetime default(getdate()),
+  dt_update datetime null,
+  stat_void int   default(0)
+)
+
+
+create table dbo.TabTemplateRel(
+   id_tab_template int identity(1,1),
+   id_tab int,
+   id_item int,
+   stat_void int default(0),
+)
+
+-----------------ToolBarTemplate--------------------------
+
+drop table ToolBarTemplate,ToolBarTemplateRel
+
+create table dbo.ToolBarTemplate(
+    id_toolbar int identity(1,1),
+	id_group int null,
+	dt_create datetime default(getdate()),
+	dt_update datetime null,
+	stat_void int default(0)
+)
+
+create table dbo.ToolBarTemplateRel(
+    id_toolbarRel int identity(1,1),
+	id_group int null,
+	id_item int null,
+	dt_create datetime default(getdate()),
+	dt_update datetime null,
+	stat_void int default(0)
+)
+
+
+-------------------Item------------------------
+
+
+drop table Item,ItemGroupRel
+
+create table dbo.ItemGroupRel(
+  id_item_group int identity(1,1),
+  id_group int,
+  id_item int,
+  stat_void int  default(0)
+)
+
+create table dbo.Item(
+   id_item int identity(1,1),
+   item_name nvarchar(1024) null,
+   icon_url nvarchar(max) null,
+   report_url nvarchar(max) null,
+   size int default(0),
+   stat_void int  default(0),
+   dt_create datetime null,
+   dt_update datetime null,
+)
+

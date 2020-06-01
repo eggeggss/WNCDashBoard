@@ -1,0 +1,9 @@
+.vs/
+Dashboard\bin
+Dashboard\obj
+BLL\bin
+DAL\bin
+BLL\obj
+DAL\obj
+Model\bin
+Model\obj
