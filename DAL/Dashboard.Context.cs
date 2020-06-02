@@ -12,6 +12,8 @@ namespace DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Dashboard1Entities : DbContext
     {
@@ -31,5 +33,14 @@ namespace DAL
         public virtual DbSet<TabTemplate> TabTemplate { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<UsersGroupsRel> UsersGroupsRel { get; set; }
+    
+        public virtual ObjectResult<zp_get_not_exists_group_Result> zp_get_not_exists_group(string empno)
+        {
+            var empnoParameter = empno != null ?
+                new ObjectParameter("empno", empno) :
+                new ObjectParameter("empno", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<zp_get_not_exists_group_Result>("zp_get_not_exists_group", empnoParameter);
+        }
     }
 }

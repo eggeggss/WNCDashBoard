@@ -11,6 +11,7 @@ namespace BLL
     {
         Users CheckUser(string empno);
         IEnumerable<GroupItem> GetToolBarByNo(string empno);
+        IEnumerable<zp_get_not_exists_group_Result> HideZone(string empno);
     }
 
     public class DashboardService : IDashboardService
@@ -20,19 +21,22 @@ namespace BLL
         private IGroupRepository _group;
         private IItemGroupRelRepository _itemgrouprel;
         private IItemRepository _itemrepo;
+        IExtentRepository _extent;
 
         public DashboardService(
             IItemRepository item,
             IUsersRepository user,
             IUsersGroupRelRepository usergroup,
             IGroupRepository group,
-            IItemGroupRelRepository itemrel)
+            IItemGroupRelRepository itemrel,
+            IExtentRepository extent)
         {
             _user = user;
             _usergroup = usergroup;
             _group = group;
             _itemgrouprel = itemrel;
             _itemrepo = item;
+            _extent = extent;
         }
 
         public Users CheckUser(string empno)
@@ -44,8 +48,9 @@ namespace BLL
 
         private IEnumerable<Group> GetUserGroups(string empno)
         {
-            var id_user = _user.Get(empno).id_user;
-
+            var users = _user.GetAll();
+            var user = users.Where(e => e.empno.Equals(empno));
+            var id_user = user.FirstOrDefault().id_user;
             var groupsRel = _usergroup
                 .GetAll()
                 .Where(e => e.id_user == id_user
@@ -91,10 +96,31 @@ namespace BLL
                     }
 
                 }
-                
 
             }
 
+            foreach (var item in groupitems)
+            {
+                foreach (var data in item.items)
+                {
+                    if (data.size == 0)
+                    {
+                        data.x = 4;
+                        data.y = 4;
+                    }
+                    else if (data.size == 1)
+                    {
+                        data.x = 2;
+                        data.y = 2;
+
+                    }
+                    else
+                    {
+                        data.x = 8;
+                        data.y = 2;
+                    }
+                }
+            }
             ////取得那些item
             //var item = from k in q
             //           join j in _itemrepo.GetAll() on k.id_item equals j.id_item
@@ -116,6 +142,10 @@ namespace BLL
             return GetToolBarByGroup(groups);
         }
 
+        public IEnumerable<zp_get_not_exists_group_Result> HideZone(string empno)
+        {
+            return _extent.GetHiddenClass(empno);
+        }
 
     }
 

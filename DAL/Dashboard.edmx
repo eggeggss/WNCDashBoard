@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Group">
           <Key>
             <PropertyRef Name="id_group" />
@@ -73,6 +73,9 @@
           <Property Name="dt_create" Type="datetime" />
           <Property Name="dt_update" Type="datetime" />
         </EntityType>
+        <Function Name="zp_get_not_exists_group" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="empno" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Database1ModelStoreContainer">
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
@@ -81,8 +84,7 @@
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersGroupsRel" EntityType="Self.UsersGroupsRel" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -161,7 +163,14 @@
           <EntitySet Name="TabTemplate" EntityType="Self.TabTemplate" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <EntitySet Name="UsersGroupsRel" EntityType="Self.UsersGroupsRel" />
+          <FunctionImport Name="zp_get_not_exists_group" ReturnType="Collection(Database1Model.zp_get_not_exists_group_Result)">
+            <Parameter Name="empno" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="zp_get_not_exists_group_Result">
+          <Property Type="Int32" Name="id_group" Nullable="false" />
+          <Property Type="String" Name="group_name" Nullable="true" MaxLength="1024" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -242,6 +251,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="zp_get_not_exists_group" FunctionName="Database1Model.Store.zp_get_not_exists_group">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Database1Model.zp_get_not_exists_group_Result">
+                <ScalarProperty Name="id_group" ColumnName="id_group" />
+                <ScalarProperty Name="group_name" ColumnName="group_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
+
+    public interface IExtentRepository
+    {
+        IEnumerable<zp_get_not_exists_group_Result> GetHiddenClass(string empno);
+    }
+
     public interface IUsersRepository : IRepository<Users>
     {
 

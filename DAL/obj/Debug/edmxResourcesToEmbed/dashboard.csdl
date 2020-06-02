@@ -75,5 +75,12 @@
     <EntitySet Name="TabTemplate" EntityType="Self.TabTemplate" />
     <EntitySet Name="Users" EntityType="Self.Users" />
     <EntitySet Name="UsersGroupsRel" EntityType="Self.UsersGroupsRel" />
+    <FunctionImport Name="zp_get_not_exists_group" ReturnType="Collection(Database1Model.zp_get_not_exists_group_Result)">
+      <Parameter Name="empno" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="zp_get_not_exists_group_Result">
+    <Property Type="Int32" Name="id_group" Nullable="false" />
+    <Property Type="String" Name="group_name" Nullable="true" MaxLength="1024" />
+  </ComplexType>
 </Schema>

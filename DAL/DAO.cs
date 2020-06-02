@@ -851,5 +851,35 @@ namespace DAL
     }
 
 
+    public class ExtentRepository: IExtentRepository
+    {
+        public EFAdapter _adapter;
+
+        public ExtentRepository()
+        {
+            _adapter = new EFAdapter();
+        }
+        public IEnumerable<zp_get_not_exists_group_Result> GetHiddenClass(string empno)
+        {
+            try
+            {
+                Func<IEnumerable<zp_get_not_exists_group_Result>> func = new Func<IEnumerable<zp_get_not_exists_group_Result>>(() =>
+                {
+                    using (var db = new Dashboard1Entities())
+                    {
+                        return db.zp_get_not_exists_group(empno).ToList();
+                        
+                    }
+                });
+
+                return _adapter.Catch<IEnumerable<zp_get_not_exists_group_Result>>(func);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"ExtentRepository GetHiddenClass fail:{ex.Message}");
+            }
+
+        }
+    }
 
 }

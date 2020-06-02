@@ -104,3 +104,30 @@ create table dbo.Item(
    dt_update datetime null,
 )
 
+
+alter proc dbo.zp_get_not_exists_group @empno varchar(100)
+as
+set nocount on;
+Set FMTONLY off; 
+--exec zp_get_not_exists_group '20000393'
+
+if object_id('tempdb.dbo.#currentgroup') is not null drop table #currentgroup
+
+select c.group_name,c.id_group
+into #currentgroup
+from Users a,UsersGroupsRel b,[Group] c
+where empno=@empno
+and a.stat_void=0
+and a.id_user=b.id_user
+and b.id_group=c.id_group
+and c.stat_void=0
+
+select a.id_group,group_name
+from [Group] a
+where not exists(select 1 
+from #currentgroup a1
+where a.id_group=a1.id_group)
+and a.stat_void=0
+
+set nocount off;
+return

@@ -147,6 +147,7 @@
     <Compile Include="ItemGroupRel.cs">
       <DependentUpon>Dashboard.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -160,6 +161,9 @@
       <DependentUpon>Dashboard.tt</DependentUpon>
     </Compile>
     <Compile Include="UsersGroupsRel.cs">
+      <DependentUpon>Dashboard.tt</DependentUpon>
+    </Compile>
+    <Compile Include="zp_get_not_exists_group_Result.cs">
       <DependentUpon>Dashboard.tt</DependentUpon>
     </Compile>
   </ItemGroup>
