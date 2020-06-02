@@ -41,6 +41,9 @@
                     Roger Roan
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Reset Panel</a>
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Logout</a>
                 </div>
             </div>
@@ -50,10 +53,10 @@
 
 
 <div class="user-content ">
-
+    <div id="currendindex" data-id="0"></div>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" data-target="tab-1" href="#">Default
+            <a class="nav-link active" data-id="0" data-target="tab-0" href="#">Default
                 <span class="ml-2 m-0 p-0" style="display:inline;float:right;">
                     <i class="material-icons text-dark">drag_indicator</i>
                 </span>
@@ -61,13 +64,13 @@
             
         </li>
         <li class="nav-item ">
-            <a class="nav-link" data-target="tab-2" href="#">Customize
+            <a class="nav-link" data-target="tab-1"  data-id="1" href="#">Customize
                 <span class="ml-2 m-0 p-0" style="display:inline;float:right;">
                     <i class="material-icons text-dark">drag_indicator</i>
                 </span>
             </a>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item nav-add">
             <a class="nav-link1 "  href="#" 
                 data-toggle="modal" data-target="#addModal">
                 <i class="material-icons text-dark mt-2">add</i>
@@ -78,15 +81,15 @@
 
     <div class="tab-content gridster">
 
-        <div class="mytab w-100" id="tab-1" >
+        <div class="mytab w-100" id="tab-0" >
             
-            <ul class="m-0 p-0" id="demo1"></ul>
+            <ul class="m-0 p-0" id="demo0"></ul>
 
         </div>
 
-        <div class="mytab non-active w-100"  id="tab-2">
+        <div class="mytab non-active w-100"  id="tab-1">
             
-            <ul class="m-0 p-0" id="demo2"></ul>
+            <ul class="m-0 p-0" id="demo1"></ul>
 
         </div>
 
@@ -108,11 +111,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <div class="form-group">
+                    <input type="text"  class="form-control" id="tabname" 
+                           aria-describedby="emailHelp" placeholder="Tab title">
+               
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save changes</button>
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success btn-addtab">Save changes</button>
             </div>
         </div>
     </div>
@@ -130,10 +137,38 @@
     </script>
 
     <script>
-        var gridster;
-        var gridster1;
+        var gridsters = [];
+        var currentindex = 0;
 
         var index = 0;
+
+
+        function bindNavLink() {
+
+            $('.nav-link').unbind();
+
+            $('.nav-link').on('click', function () {
+
+                $('.nav-link').removeClass('active');
+
+                $(this).toggleClass('active');
+
+                var target = $(this).data("target");
+
+                $('.mytab').addClass("non-active");
+
+                $('#' + target).removeClass("non-active");
+
+                var id = Number($(this).data('id'));
+
+                $('#currendindex').data('id', id);
+
+                currendindex = id;
+
+            });
+        }
+
+
         function bindBtnRemove() {
 
             $('.btn-remove').unbind();
@@ -142,56 +177,42 @@
 
                 var obj = $(this).parent('header').parent('li');
 
-                gridster.remove_widget(obj);
+                var idx = Number($('#currendindex').data('id'));
+
+                var gridsternow = gridsters[idx];
+
+                gridsternow.remove_widget(obj);
 
                 savePanel();
-
 
             });
         }
 
+        //Add Zone
         function addPanel(obj, id) {
 
+            var reportname = obj.find('.reportname').text();
+            var x = Number(obj.data('x'));
+            var y = Number(obj.data('y'));
+            var group = obj.data('group');
 
+            var idx = Number($('#currendindex').data('id'));
 
-            if ($('#a' + id).length > 0) {
+            var gridsternow = gridsters[idx];
 
-            } else {
+            gridsternow.add_widget(
+                '<li class="' + group + '"' + ' shadow-lg rounded" data-row="2" data-col="4" data-sizex="3" data-sizey="1">' +
+                '<header class="text-center rounded-top"><span class=" m-0 p-0">|||</span><button style="float:right;" ' +
+                'class= "btn btn-outline-info btn-sm m-0 p-0 btn-remove" > X</button ></header > <div class="card-body m-0 p-0"> <h4 class="card-title text-center m-0 p-0">' + reportname + '</h4>' +
+                '<div class="web-content" id="a' + id + '" ></div>' +
+                '</div > </li > ', x, y);
 
-                var reportname = obj.find('.reportname').text();
-                var x = Number(obj.data('x'));
-                var y = Number(obj.data('y'));
-                var group = obj.data('group');
+            bindBtnRemove();
+            savePanel();
+            loadSingleData('a' + id);
 
-                if (index == 0) {
-                    gridster.add_widget(
-                    '<li class="' + group + '"' + ' shadow-lg rounded" data-row="2" data-col="4" data-sizex="3" data-sizey="1">' +
-                    '<header class="text-center rounded-top"><span class=" m-0 p-0">|||</span><button style="float:right;" ' +
-                    'class= "btn btn-outline-info btn-sm m-0 p-0 btn-remove" > X</button ></header > <div class="card-body m-0 p-0"> <h4 class="card-title text-center m-0 p-0">' + reportname + '</h4>' +
-                    '<div class="web-content" id="a' + id + '" ></div>' +
-                    '</div > </li > ', x, y);
-
-                    bindBtnRemove();
-                    savePanel();
-                    loadSingleData('a' + id);
-                } else {
-                    gridster1.add_widget(
-                    '<li class="' + group + '"' + ' shadow-lg rounded" data-row="2" data-col="4" data-sizex="3" data-sizey="1">' +
-                    '<header class="text-center rounded-top"><span class=" m-0 p-0">|||</span><button style="float:right;" ' +
-                    'class= "btn btn-outline-info btn-sm m-0 p-0 btn-remove" > X</button ></header > <div class="card-body m-0 p-0"> <h4 class="card-title text-center m-0 p-0">' + reportname + '</h4>' +
-                    '<div class="web-content" id="a' + id + '" ></div>' +
-                    '</div > </li > ', x, y);
-
-                    bindBtnRemove();
-                    savePanel();
-                    loadSingleData('a' + id);
-                }
-                
-
-                $('.gs-w').css('overflow', 'hidden');
-
-            }
-
+            $('.gs-w').css('overflow', 'hidden');
+     
         }
 
         function loadSingleData(id) {
@@ -224,7 +245,7 @@
         }
 
         $(function () {
-
+            
             var pos = localStorage.getItem('positions');
 
             if (pos != null) {
@@ -235,10 +256,14 @@
                 //$('.gridster ul').html(pos);
             } else {
 
+
                 //$('.user-content').removeClass("non-active");
             }
 
-            gridster = $("#demo1").gridster({
+
+
+
+            var gridster = $("#demo0").gridster({
                 widget_base_dimensions: [100, 100],
                 widget_margins: [3, 3],
 
@@ -257,7 +282,8 @@
             }).data('gridster');
 
 
-            gridster1 = $("#demo2").gridster({
+
+            var gridster1 = $("#demo1").gridster({
                 widget_base_dimensions: [100, 100],
                 widget_margins: [3, 3],
 
@@ -276,6 +302,12 @@
             }).data('gridster');
 
 
+            gridsters.push(gridster);
+
+            gridsters.push(gridster1);
+            
+            currentindex = Number($('#currendindex').data('id'));
+            
 
             $('.js-resize-random').on('click', function () {
                 gridster.resize_widget(gridster.$widgets.eq(getRandomInt(0, 9)),
@@ -314,6 +346,7 @@
 
             loadData();
 
+            bindNavLink();
 
             $('.gs-w').css('overflow', 'hidden');
 
@@ -329,7 +362,64 @@
 
                 $('#' + target).removeClass("non-active");
 
-                index = 1;
+                var id = Number($(this).data('id'));
+
+                $('#currendindex').data('id', id);
+
+                currendindex = id;
+                
+            });
+
+            $('.btn-addtab').on('click', function () {
+                var counter=gridsters.length;
+
+                $('.nav-link').removeClass("active");
+
+                var title=$('#tabname').val();
+
+                $('.nav-add').before(
+                    "<li class='nav-item'> <a class='nav-link active' data-target='tab-" + counter+"' data-id='" + counter + "' href='#'>" + title+""+
+                    "<span class='ml-2 m-0 p-0' style='display:inline;float:right;'>" +
+                    " <i class='material-icons text-dark'>drag_indicator</i>" +
+                    "</span>" +
+                    " </a>" +
+                    "</li >");
+
+                $('.mytab').addClass("non-active");
+                //$('.tab-content').addClass("non-active");
+
+                $('.tab-content').append(
+                    "<div class='mytab  w-100' id='tab-" + counter+"'>"+
+                    "<ul class='m-0 p-0' id='demo" + counter+"'></ul></div>"
+                );
+
+                var gridsternew = $("#demo" + counter).gridster({
+                    widget_base_dimensions: [100, 100],
+                    widget_margins: [3, 3],
+
+                    helper: 'clone',
+                    draggable: {
+                        drag: function () {
+                            savePanel();
+                        },
+                    },
+                    resize: {
+                        enabled: true,
+                        resize: function () {
+                            savePanel();
+                        },
+                    }
+                }).data('gridster');
+
+                gridsters.push(gridsternew);
+
+                bindNavLink();
+
+                $('#tabname').val('');
+
+                $('.btn-close').trigger('click');
+
+                $('.nav-link').trigger('click');
 
             });
 
