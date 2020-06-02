@@ -236,9 +236,9 @@
 
                 var data = $('.user-content').html();
                 //var data = $('.gridster ul').html();
-                localStorage.removeItem('positions')
+                localStorage.removeItem('positions');
                 localStorage.setItem('positions', data);
-
+                
 
             }, 1000);
 
@@ -250,65 +250,91 @@
 
             if (pos != null) {
 
-                localStorage.removeItem('positions');
+                //localStorage.removeItem('positions');
 
                 $('.user-content').html(pos);
                 //$('.gridster ul').html(pos);
-            } else {
+            } 
 
+            var gridsteritem;
 
-                //$('.user-content').removeClass("non-active");
-            }
+            $('.nav-link').each(function (inx, item) {
 
+                var id = $(this).data('id');
 
+                gridsteritem = $("#demo" + id).gridster({
+                    widget_base_dimensions: [100, 100],
+                    widget_margins: [3, 3],
 
-
-            var gridster = $("#demo0").gridster({
-                widget_base_dimensions: [100, 100],
-                widget_margins: [3, 3],
-
-                helper: 'clone',
-                draggable: {
-                    drag: function () {
-                        savePanel();
+                    helper: 'clone',
+                    draggable: {
+                        drag: function () {
+                            savePanel();
+                        },
                     },
-                },
-                resize: {
-                    enabled: true,
-                    resize: function () {
-                        savePanel();
-                    },
-                }
-            }).data('gridster');
+                    resize: {
+                        enabled: true,
+                        resize: function () {
+                            savePanel();
+                        },
+                    }
+                }).data('gridster');
+
+
+                gridsters.push(gridsteritem);
+
+
+            });
+            //    
+            //});
+
+
+            //var gridster = $("#demo0").gridster({
+            //    widget_base_dimensions: [100, 100],
+            //    widget_margins: [3, 3],
+
+            //    helper: 'clone',
+            //    draggable: {
+            //        drag: function () {
+            //            savePanel();
+            //        },
+            //    },
+            //    resize: {
+            //        enabled: true,
+            //        resize: function () {
+            //            savePanel();
+            //        },
+            //    }
+            //}).data('gridster');
 
 
 
-            var gridster1 = $("#demo1").gridster({
-                widget_base_dimensions: [100, 100],
-                widget_margins: [3, 3],
+            //var gridster1 = $("#demo1").gridster({
+            //    widget_base_dimensions: [100, 100],
+            //    widget_margins: [3, 3],
 
-                helper: 'clone',
-                draggable: {
-                    drag: function () {
-                        savePanel();
-                    },
-                },
-                resize: {
-                    enabled: true,
-                    resize: function () {
-                        savePanel();
-                    },
-                }
-            }).data('gridster');
+            //    helper: 'clone',
+            //    draggable: {
+            //        drag: function () {
+            //            savePanel();
+            //        },
+            //    },
+            //    resize: {
+            //        enabled: true,
+            //        resize: function () {
+            //            savePanel();
+            //        },
+            //    }
+            //}).data('gridster');
 
+            //gridsters.push(gridster);
 
-            gridsters.push(gridster);
+            //gridsters.push(gridster1);
 
-            gridsters.push(gridster1);
             
+
             currentindex = Number($('#currendindex').data('id'));
             
-
             $('.js-resize-random').on('click', function () {
                 gridster.resize_widget(gridster.$widgets.eq(getRandomInt(0, 9)),
                 getRandomInt(1, 4), getRandomInt(1, 4))
