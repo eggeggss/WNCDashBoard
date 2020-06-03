@@ -2,98 +2,95 @@
 <html>
 
 <head>
-    <title>Multi Series Pie Chart</title>
+    <title>Pie Chart</title>
+    <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <style>
-        body {
-            overflow: hidden;
-        }
-
-    </style>
 </head>
 
 <body>
-    <div id="canvas-holder" class=""style="width:100%;margin-top:10%;">
+    <div id="canvas-holder" style="width:100%; margin-top:10%;">
         <canvas id="chart-area"></canvas>
     </div>
+    <button id="randomizeData">Randomize Data</button>
+    <button id="addDataset">Add Dataset</button>
+    <button id="removeDataset">Remove Dataset</button>
     <script>
-		var ctx = document.getElementById('chart-area');
-		new Chart(ctx, {
+		var randomScalingFactor = function() {
+			return Math.round(Math.random() * 100);
+		};
+
+		var config = {
 			type: 'pie',
 			data: {
+				datasets: [{
+					data: [
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+						randomScalingFactor(),
+					],
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.orange,
+						window.chartColors.yellow,
+						window.chartColors.green,
+						window.chartColors.blue,
+					],
+					label: 'Dataset 1'
+				}],
 				labels: [
-					'Overall Yay',
-					'Overall Nay',
-					'Group A Yay',
-					'Group A Nay',
-					'Group B Yay',
-					'Group B Nay',
-					'Group C Yay',
-					'Group C Nay'
-				],
-				datasets: [
-					{backgroundColor: ['#AAA', '#777'], data: [21, 79]},
-					{
-						backgroundColor: ['hsl(0, 100%, 60%)', 'hsl(0, 100%, 35%)'],
-						data: [33, 67]
-					},
-					{
-						backgroundColor: ['hsl(100, 100%, 60%)', 'hsl(100, 100%, 35%)'],
-						data: [20, 80]
-					},
-					{
-						backgroundColor: ['hsl(180, 100%, 60%)', 'hsl(180, 100%, 35%)'],
-						data: [10, 90]
-					}
+					'Red',
+					'Orange',
+					'Yellow',
+					'Green',
+					'Blue'
 				]
 			},
 			options: {
-				legend: {
-					labels: {
-						generateLabels: function(chart) {
-							// Get the default label list
-							var original = Chart.defaults.pie.legend.labels.generateLabels;
-							var labels = original.call(this, chart);
-
-							// Build an array of colors used in the datasets of the chart
-							var datasetColors = chart.data.datasets.map(function(e) {
-								return e.backgroundColor;
-							});
-							datasetColors = datasetColors.flat();
-
-							// Modify the color and hide state of each label
-							labels.forEach(label => {
-								// There are twice as many labels as there are datasets. This converts the label index into the corresponding dataset index
-								label.datasetIndex = (label.index - label.index % 2) / 2;
-
-								// The hidden state must match the dataset's hidden state
-								label.hidden = !chart.isDatasetVisible(label.datasetIndex);
-
-								// Change the color to match the dataset
-								label.fillStyle = datasetColors[label.index];
-							});
-
-							return labels;
-						}
-					},
-					onClick: function(mouseEvent, legendItem, legend) {
-						// toggle the visibility of the dataset from what it currently is
-						legend.chart.getDatasetMeta(
-							legendItem.datasetIndex
-						).hidden = legend.chart.isDatasetVisible(legendItem.datasetIndex);
-						legend.chart.update();
-					}
-				},
-				tooltips: {
-					callbacks: {
-						label: function(tooltipItem, data) {
-							var labelIndex = (tooltipItem.datasetIndex * 2) + tooltipItem.index;
-							return data.labels[labelIndex] + ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-						}
-					}
-				}
+				responsive: true
 			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('chart-area').getContext('2d');
+			window.myPie = new Chart(ctx, config);
+		};
+
+		document.getElementById('randomizeData').addEventListener('click', function() {
+			config.data.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return randomScalingFactor();
+				});
+			});
+
+			window.myPie.update();
+		});
+
+		var colorNames = Object.keys(window.chartColors);
+		document.getElementById('addDataset').addEventListener('click', function() {
+			var newDataset = {
+				backgroundColor: [],
+				data: [],
+				label: 'New dataset ' + config.data.datasets.length,
+			};
+
+			for (var index = 0; index < 10; ++index) {
+				newDataset.data.push(randomScalingFactor());
+
+				var colorName = colorNames[index % colorNames.length];
+				var newColor = window.chartColors[colorName];
+				newDataset.backgroundColor.push(newColor);
+			}
+
+			config.data.datasets.push(newDataset);
+			window.myPie.update();
+		});
+
+		document.getElementById('removeDataset').addEventListener('click', function() {
+			config.data.datasets.splice(0, 1);
+			window.myPie.update();
 		});
     </script>
 </body>

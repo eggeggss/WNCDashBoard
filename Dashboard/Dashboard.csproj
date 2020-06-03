@@ -192,6 +192,9 @@
     <Content Include="Content\ControlPages.xml" />
     <Content Include="Content\InitialData.xml" />
     <Content Include="Content\jquery.gridster.css" />
+    <Content Include="Content\Reports\chart\Chart.min.js" />
+    <Content Include="Content\Reports\icon6.html" />
+    <Content Include="Content\Reports\chart\utils.js" />
     <Content Include="Content\Reports\icon1.html" />
     <Content Include="Content\Reports\icon2.html" />
     <Content Include="Content\Reports\icon3.html" />
