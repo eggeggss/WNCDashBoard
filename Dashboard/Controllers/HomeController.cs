@@ -1,4 +1,5 @@
 ﻿using BLL;
+using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,6 +81,9 @@ namespace Dashboard.Controllers
             return PartialView("_GenReport", item);
 
         }
+
+
+
 
         public ActionResult About()
         {

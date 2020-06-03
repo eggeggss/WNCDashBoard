@@ -34,17 +34,17 @@
             background-color: #17202A;
         }
 
-            .gridster li:hover {
-                cursor: pointer;
-            }
+        .gridster li:hover {
+            cursor: pointer;
+        }
 
-            .gridster li header {
-                background-color: #273746;
-            }
+        .gridster li header {
+            background-color: #273746;
+        }
 
-                .gridster li header:hover {
-                    cursor: all-scroll;
-                }
+        .gridster li header:hover {
+            cursor: all-scroll;
+        }
 
         .wj-gauge text {
             color: white;
@@ -54,7 +54,7 @@
             cursor: pointer;
         }
 
-        i {
+        i{
             color: white;
         }
 
@@ -91,28 +91,27 @@
 </head>
 
 <body id="page-top">
-
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar bg-gradient-dark-->
-
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion"
             style="background-color:#17202A !important;" id="accordionSidebar">
-
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-itema text-center py-4">
                 <a class="nav-linka text-white  " href="#">
-
                     @*<i class="material-icons">table_chart</i>*@
-
                     <span>Backend Sample</span>
-
                 </a>
             </li>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading text-center">
+                <div class="text-white">
+                   <i class="material-icons">add_box</i>
+                   <span class="py-1">New Zone Item</span>
+                </div>
+            </div>
 
             @foreach (var item in tools)
             {
@@ -156,38 +155,29 @@
                                     </a>
                                 </div>
                             }
-
                         </div>
                     </div>
                 </li>
-                                }
-
+            }
             <div class="text-center d-none d-md-inline mt-3 mr-5">
                 <button class="rounded-circle border-0" id="sidebarToggle">
-
                     <i class="material-icons py-2">keyboard_arrow_left</i>
                 </button>
             </div>
-
         </ul>
-
         <!-- Sidebar Toggler (Sidebar) -->
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid ml-0 p-0">
-
                     @RenderBody()
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
             <!-- Footer -->
@@ -199,17 +189,14 @@
                 </div>
             </footer>
             <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     @*<a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>*@
-
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -231,8 +218,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
-
-   
+    <script src="@Url.Content("~/Scripts/bootstrap.bundle.min.js")"></script>
     <!-- Custom scripts for all pages-->
 
     <script>
@@ -243,17 +229,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.6/jquery.gridster.min.js" type="text/javascript" charset="utf-8"></script>
 
-    <script src="@Url.Content("~/Scripts/popper.min.js")"></script>
-
-    <script src="@Url.Content("~/Scripts/bootstrap.bundle.min.js")"></script>
     <!-- Core plugin JavaScript-->
     <script src="@Url.Content("~/Scripts/jquery.easing.min.js")"></script>
     <script src="@Url.Content("~/Scripts/sb-admin-2.min.js")"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
     <!-- Page level plugins -->
     @*<script src="@Url.Content("~/Scripts/Chart.min.js")"></script>*@
-
     <script>
         $(function () {
 

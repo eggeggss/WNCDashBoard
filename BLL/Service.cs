@@ -17,12 +17,12 @@ namespace BLL
 
     public class DashboardService : IDashboardService
     {
-        private IUsersRepository _user;
-        private IUsersGroupRelRepository _usergroup;
-        private IGroupRepository _group;
-        private IItemGroupRelRepository _itemgrouprel;
-        private IItemRepository _itemrepo;
-        IExtentRepository _extent;
+        private readonly IUsersRepository _user;
+        private readonly IUsersGroupRelRepository _usergroup;
+        private readonly IGroupRepository _group;
+        private readonly IItemGroupRelRepository _itemgrouprel;
+        private readonly IItemRepository _itemrepo;
+        private readonly IExtentRepository _extent;
 
         public DashboardService(
             IItemRepository item,
@@ -152,6 +152,9 @@ namespace BLL
         {
            return _itemrepo.GetAll().Where(e => e.id_item == id_item).FirstOrDefault();
         }
+
+
+
 
     }
 

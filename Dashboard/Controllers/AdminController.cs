@@ -1,4 +1,5 @@
 ﻿using BLL;
+using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Dashboard.Controllers
 {
+    [RoutePrefix("Admin")]
     public class AdminController : Controller
     {
         private IDashboardService _dashboard;
@@ -37,5 +39,42 @@ namespace Dashboard.Controllers
 
             return View();
         }
+
+
+        [HttpGet]
+        [Route("GetZoneItem/{id_item}")]
+        public ActionResult GetZoneItem(int? id_item)
+        {
+            var item = _dashboard.GetReportInfo((int)id_item);
+
+            List<SelectListItem> sizeList = new List<SelectListItem>();
+
+            sizeList.Add(new SelectListItem { Text = "4x4", Value = "0" });
+            sizeList.Add(new SelectListItem { Text = "2x2", Value = "1" });
+            sizeList.Add(new SelectListItem { Text = "2x4", Value = "2" });
+            ViewBag.sizeList = sizeList;
+
+            return PartialView("_GetZoneItem", item);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateZone([System.Web.Http.FromBody] Item item)
+        {
+            try
+            {
+
+
+                return RedirectToAction("Index");
+                //_bll.UpdateWhoTrans(data.empno, data.orders);
+
+                //return new HttpStatusCodeResult(200);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+
+        }
+
     }
 }

@@ -1,41 +1,37 @@
 ﻿
-
 @{
     Layout = "~/Views/Shared/_adminLayout.cshtml";
     String Name = (String)ViewBag.Name;
     String hiddenstyle = (String)ViewBag.HiddenStype;
 
 }
-
 <style>
     .custom-gauge .wj-pointer path {
         fill: #ffa500;
         stroke: #cd853f;
     }
 
-    .non-active{
-       display:none;
-
-    }
-    .nav-item:hover{
-       cursor:pointer;
+    .non-active {
+        display: none;
     }
 
-    .dropdown-toggle:hover{
+    .nav-item:hover {
+        cursor: pointer;
+    }
+
+    .dropdown-toggle:hover {
+        cursor: pointer;
+    }
+
+    .gridster {
+        width: 1440;
+    }
+
+    .btn-zone-add:hover{
         cursor:pointer;
     }
 
-    .gridster{
-     width:1440;
-
-    }
-    
-
-
-   @hiddenstyle
-
 </style>
-
 <div class="container-fluid ">
     <div class="row justify-content-end ">
         <div class="col-1 m-0 p-0 mr-1">
@@ -51,12 +47,10 @@
                     <a class="dropdown-item" href="#">Logout</a>
                 </div>
 
-
             </div>
         </div>
     </div>
 </div>
-
 <div class="user-content ">
     <div id="currendindex" data-id="0"></div>
     <ul class="nav nav-tabs">
@@ -64,19 +58,22 @@
             <a class="nav-link active" data-id="0" data-target="tab-0" href="#">
                 MFG001
                 <span class="ml-2 m-0 p-0 btn-edit"
-                       data-toggle="modal" data-target="#EditPanelModal"
-                       style="display:inline;float:right;">
+                      data-title="MFG001"
+                      data-group="MFG"
+                      data-toggle="modal" data-target="#EditPanelModal"
+                      style="display:inline;float:right;">
                     <i class="material-icons text-dark">drag_indicator</i>
                 </span>
             </a>
-
         </li>
         <li class="nav-item ">
             <a class="nav-link" data-target="tab-1" data-id="1" href="#">
                 ACC001
-                <span class="ml-2 m-0 p-0" style="display:inline;float:right;"
-                       data-toggle="modal" data-target="#EditPanelModal"
-                      >
+                <span class="ml-2 m-0 p-0 btn-edit"
+                      data-title="ACC001"
+                      data-group="ACC"
+                      style="display:inline;float:right;"
+                      data-toggle="modal" data-target="#EditPanelModal">
                     <i class="material-icons text-dark">drag_indicator</i>
                 </span>
             </a>
@@ -87,46 +84,48 @@
                 <i class="material-icons text-dark mt-2">add</i>
             </a>
         </li>
-
     </ul>
 
+
     <div class="tab-content gridster">
-
         <div class="mytab w-100" id="tab-0">
-
             <ul class="m-0 p-0" id="demo0"></ul>
-
         </div>
-
         <div class="mytab non-active w-100" id="tab-1">
-
             <ul class="m-0 p-0" id="demo1"></ul>
-
         </div>
-
 
     </div>
-
 </div>
 
-
-
-<!-- Modal -->
+<!--Add Panel Modal -->
 <div class="modal fade"
      id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add a New TabItem</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add New Panel</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="tabname"
-                           aria-describedby="emailHelp" placeholder="Tab title">
+                    <label>Panel</label>
+                    <input type="text" class="form-control" id="panelname1" name="panelname"
+                           placeholder="Tab title">
+                </div>
 
+                <div class="form-group">
+                    <label>Group</label>
+
+
+
+                    <select class="form-control" id="groupname1" name="groupname">
+                        <option>MFG</option>
+                        <option>ACC</option>
+                    </select>
+                   
                 </div>
             </div>
             <div class="modal-footer">
@@ -137,8 +136,7 @@
     </div>
 </div>
 
-
-<!-- Modal -->
+<!--Edit Panel Modal -->
 <div class="modal fade"
      id="EditPanelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPanel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -151,8 +149,24 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                   
+                    <div class="form-group">
+                        <label>Panel</label>
+                        <input type="text" class="form-control" id="panelname" name="panelname"
+                               placeholder="Tab title">
+                    </div>
 
+                    <div class="form-group">
+                        <label>Group</label>
+
+                        <select class="form-control"  id="groupname" name="groupname">
+                            <option>MFG</option>
+                            <option>ACC</option>
+                        </select>
+                        @*<input type="text" class="form-control" id="groupname" name="groupname"
+                               placeholder="GroupName">*@
+
+
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -163,10 +177,29 @@
     </div>
 </div>
 
+
+
+<!--Edit Zone Modal -->
+<div class="modal fade"
+     id="EditZoneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalPanel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalPanel">Edit Zone</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body zone-body">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
 @*<button class=" btn btn-success btn-Save">Save</button>*@
 @section scripts
 {
-
 
     <script type="text/javascript">
         function getRandomInt(min, max) {
@@ -180,13 +213,37 @@
 
         var index = 0;
 
+        function btnZoneEdit() {
+            
+            $('.btn-edit-zone').unbind();
+            $('.btn-edit-zone').on('click', function () {
+                var id = $(this).data('id').replace('rp_','');
+
+                var url = "@Url.Content("~/Admin/GetZoneItem")/" + id;
+
+                $('.zone-body').load(url, function () {
+                    
+                });
+                
+            });
+
+        }
+
+
         function bindPanelEdit() {
             $('.btn-edit').unbind();
             $('.btn-edit').on('click', function (e) {
                 //e.preventDefault();
                 //e.stoppropagation();
-               // $('#exampleModal').modal('show');
-                //alert('test');
+                
+                var title=$(this).data("title");
+                var group = $(this).data("group");
+
+
+                $('#panelname').val(title);
+                $('#groupname').val(group);
+
+
             });
         }
 
@@ -246,38 +303,45 @@
             var idx = Number($('#currendindex').data('id'));
 
             var gridsternow = gridsters[idx];
-
-            //alert(gridsternow);
+            var newid = Math.floor(Math.random() * 99999);
 
             gridsternow.add_widget(
                 '<li class="' + group + '"' + ' shadow-lg rounded" data-row="2" data-col="4" data-sizex="3" data-sizey="1">' +
                 '<header class="text-center rounded-top"><span class=" m-0 p-0">|||</span><button style="float:right;" ' +
-                'class= "btn btn-outline-info btn-sm m-0 p-0 btn-remove" > X</button ></header > <div class="card-body m-0 p-0"> <h4 class="card-title text-center m-0 p-0">' + reportname + '</h4>' +
-                '<div class="web-content" id="a' + id + '" ></div>' +
-                "</div > <span class='ml-2 m-0 p-0' style='display:inline;float:right;'>"+
-                "<i class='material-icons text-dark'>drag_indicator</i>"+
+                'class= "btn btn-outline-info btn-sm m-0 p-0 btn-remove" > X</button ></header > <div class="card-body m-0 p-0"> '+
+                '<div class="web-content" style="width:80%;float:left;" data-id="a' + id + '" id="a' + newid + '" ></div>' +
+                ' <div  class=" m-0 p-0 btn-edit-zone" '+
+                      'data-toggle="modal" data-id="'+id+'" data-target="#EditZoneModal"'+
+                      ' style = "float:right;" >'+
+                '<i class="material-icons text-dark">drag_indicator</i>'+
+                '</div >'+
                 '</span></li >', x, y);
 
             bindBtnRemove();
+            btnZoneEdit();
             savePanel();
-            loadSingleData('a' + id);
+            loadSingleData('a' + id,newid);
 
             $('.gs-w').css('overflow', 'hidden');
 
         }
 
 
-        function loadSingleData(id) {
-             var url = "@Url.Content("~/Home/GenReport/")" + id;
-             //$.get(url, function (e) {
-             //    $('#'+id).html(e);
-             //});
+        function loadSingleData(id,newid) {
+            var url = "@Url.Content("~/Home/GenReport/")" + id;
+
+            $.get(url, function (e) {
+
+
+                 $('#a' + newid).html(e);
+             });
         }
 
         function loadData() {
 
             $('.web-content').each(function (idx, obj) {
-                var id = $(this).attr('id');
+                var id = $(this).data('id');
+                //var id = $(this).attr('id');
                 loadSingleData(id);
             })
         }
@@ -285,12 +349,12 @@
         function savePanel() {
 
             setTimeout(function () {
-                /*
+
                 var data = $('.user-content').html();
-              
-                localStorage.removeItem('positions');
-                localStorage.setItem('positions', data);
-                */
+                //var data = $('.gridster ul').html();
+                localStorage.removeItem('positions_backend');
+                localStorage.setItem('positions_backend', data);
+
 
             }, 1000);
 
@@ -298,13 +362,13 @@
 
         $(function () {
 
-            var pos = localStorage.getItem('positions');
+            var pos = localStorage.getItem('positions_backend');
 
             if (pos != null) {
 
                 //localStorage.removeItem('positions');
 
-               // $('.user-content').html(pos);
+                $('.user-content').html(pos);
                 //$('.gridster ul').html(pos);
             }
 
@@ -446,8 +510,6 @@
 
                 bindNavLink();
 
-                bindPanelEdit();
-
                 $('#tabname').val('');
 
                 $('.btn-close').trigger('click');
@@ -459,14 +521,13 @@
 
             $('.btn-reset').on('click', function () {
 
-                localStorage.removeItem('positions');
+                localStorage.removeItem('positions_backend');
                 location.reload();
             });
 
             bindPanelEdit();
+            btnZoneEdit();
 
-            
-           
         });
     </script>
 
