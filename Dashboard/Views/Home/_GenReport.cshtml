@@ -1,0 +1,40 @@
+﻿@using DAL;
+@model Item
+
+<style>
+            .report-frame {
+                position: relative;
+                padding-bottom: 75%;
+               
+               
+            }
+            .report-frame:hover{
+                cursor:pointer;
+            }
+
+         .report-frame iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+            
+        }
+         .report-title{
+             color:white;
+         }
+         .report-title:hover{
+             text-decoration:none;
+         }
+</style>
+<div class="text-center">
+    <a href="@Model.report_url" class="report-title" target="_blank">@Model.item_name</a>
+    <div class="report-frame">
+        <iframe src="@Model.icon_url"
+                width="600" height="450"
+                class="report-frame-content"
+                frameborder="0" style="border:0"></iframe>
+    </div>
+</div>
+     
+  

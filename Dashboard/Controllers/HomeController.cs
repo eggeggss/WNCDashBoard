@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Dashboard.Controllers
 {
     public class user
@@ -43,7 +44,7 @@ namespace Dashboard.Controllers
         {
             var empno = "20000390";
             var tools=_dashboard.GetToolBarByNo(empno);
-
+            ViewBag.Name = _dashboard.CheckUser(empno).empname;
             ViewBag.Tools = tools;
 
             //var data=_dashboard.HideZone(empno);
@@ -62,6 +63,23 @@ namespace Dashboard.Controllers
         }
 
 
+
+        [HttpGet]
+        [Route("GenReport/{id}")]
+        public ActionResult GenReport(string id)
+        {
+            ViewBag.id = id;
+
+            var replaceid=id.Replace("arp_", "");
+
+            int id_item = 0;
+            bool ok = Int32.TryParse(replaceid, out id_item);
+
+            var item=_dashboard.GetReportInfo(id_item);
+
+            return PartialView("_GenReport", item);
+
+        }
 
         public ActionResult About()
         {

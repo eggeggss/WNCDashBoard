@@ -24,7 +24,7 @@
     <!-- Custom styles for this template-->
     <link href="@Url.Content("~/Content/sb-admin-2.min.css")" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/jquery.gridster.css")">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"  rel="stylesheet" />
     @*@Html.C1().Styles()
         @Html.C1().Scripts().Basic().Finance().FlexSheet().FlexViewer().Olap().MultiRow()*@
 
@@ -34,17 +34,17 @@
             background-color: #17202A;
         }
 
-            .gridster li:hover {
-                cursor: pointer;
-            }
+        .gridster li:hover {
+            cursor: pointer;
+        }
 
-            .gridster li header {
-                background-color: #273746;
-            }
+        .gridster li header {
+            background-color: #273746;
+        }
 
-                .gridster li header:hover {
-                    cursor: all-scroll;
-                }
+        .gridster li header:hover {
+            cursor: all-scroll;
+        }
 
         .wj-gauge text {
             color: white;
@@ -78,6 +78,11 @@
 
         .web-content {
             overflow: hidden;
+        }
+
+        .nav-item{
+    
+            width:200px;
         }
     </style>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -189,7 +194,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2019</span>
+                        @*<span>Copyright &copy; Your Website 2019</span>*@
                     </div>
                 </div>
             </footer>
@@ -242,7 +247,7 @@
     <script src="@Url.Content("~/Scripts/jquery.easing.min.js")"></script>
     <script src="@Url.Content("~/Scripts/sb-admin-2.min.js")"></script>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
     <!-- Page level plugins -->
     @*<script src="@Url.Content("~/Scripts/Chart.min.js")"></script>*@
 

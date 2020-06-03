@@ -12,6 +12,7 @@ namespace BLL
         Users CheckUser(string empno);
         IEnumerable<GroupItem> GetToolBarByNo(string empno);
         IEnumerable<zp_get_not_exists_group_Result> HideZone(string empno);
+        Item GetReportInfo(int id_item);
     }
 
     public class DashboardService : IDashboardService
@@ -145,6 +146,11 @@ namespace BLL
         public IEnumerable<zp_get_not_exists_group_Result> HideZone(string empno)
         {
             return _extent.GetHiddenClass(empno);
+        }
+
+        public Item GetReportInfo(int id_item)
+        {
+           return _itemrepo.GetAll().Where(e => e.id_item == id_item).FirstOrDefault();
         }
 
     }

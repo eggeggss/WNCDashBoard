@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Home Page";
     String hiddenstyle = (String)ViewBag.HiddenStype;
-
+    String Name=(String)ViewBag.Name;
 }
 
 <style>
@@ -25,6 +25,12 @@
         cursor:pointer;
     }
 
+    .gridster{
+     width:1440;
+    
+    }
+
+
    @hiddenstyle
 
 </style>
@@ -38,14 +44,13 @@
                    id="dropdownMenuButton"
                    data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Roger Roan
+                    @Name
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Reset Panel</a>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item btn-reset" href="#">Reset Panel</a>
                     <a class="dropdown-item" href="#">Logout</a>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -129,7 +134,6 @@
 @section scripts
 {
 
-
     <script type="text/javascript">
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -142,6 +146,15 @@
 
         var index = 0;
 
+        function bindPanelEdit() {
+            $('.btn-edit').unbind();
+            $('.btn-edit').on('click', function (e) {
+                //e.preventDefault();
+                //e.stoppropagation();
+                //$('.dropdown-toggle').dropdown();
+                //alert('test');
+            });
+        }
 
         function bindNavLink() {
 
@@ -199,33 +212,39 @@
             var idx = Number($('#currendindex').data('id'));
 
             var gridsternow = gridsters[idx];
+            var newid = Math.floor(Math.random() * 99999);
 
             gridsternow.add_widget(
                 '<li class="' + group + '"' + ' shadow-lg rounded" data-row="2" data-col="4" data-sizex="3" data-sizey="1">' +
                 '<header class="text-center rounded-top"><span class=" m-0 p-0">|||</span><button style="float:right;" ' +
-                'class= "btn btn-outline-info btn-sm m-0 p-0 btn-remove" > X</button ></header > <div class="card-body m-0 p-0"> <h4 class="card-title text-center m-0 p-0">' + reportname + '</h4>' +
-                '<div class="web-content" id="a' + id + '" ></div>' +
-                '</div > </li > ', x, y);
+                'class= "btn btn-outline-info btn-sm m-0 p-0 btn-remove" > X</button ></header > <div class="card-body m-0 p-0"> '+ 
+                '<div class="web-content" data-id="a'+id+'" id="a' + newid + '" ></div>' +
+                '</span></li >', x, y);
 
             bindBtnRemove();
             savePanel();
-            loadSingleData('a' + id);
+            loadSingleData('a' + id,newid);
 
             $('.gs-w').css('overflow', 'hidden');
      
         }
 
-        function loadSingleData(id) {
-             var url = "@Url.Content("~/Home/GenReport/")" + id;
-             //$.get(url, function (e) {
-             //    $('#'+id).html(e);
-             //});
+
+        function loadSingleData(id,newid) {
+            var url = "@Url.Content("~/Home/GenReport/")" + id;
+           
+            $.get(url, function (e) {
+
+              
+                 $('#a' + newid).html(e);
+             });
         }
 
         function loadData() {
 
             $('.web-content').each(function (idx, obj) {
-                var id = $(this).attr('id');
+                var id = $(this).data('id');
+                //var id = $(this).attr('id');
                 loadSingleData(id);
             })
         }
@@ -285,54 +304,7 @@
 
 
             });
-            //    
-            //});
-
-
-            //var gridster = $("#demo0").gridster({
-            //    widget_base_dimensions: [100, 100],
-            //    widget_margins: [3, 3],
-
-            //    helper: 'clone',
-            //    draggable: {
-            //        drag: function () {
-            //            savePanel();
-            //        },
-            //    },
-            //    resize: {
-            //        enabled: true,
-            //        resize: function () {
-            //            savePanel();
-            //        },
-            //    }
-            //}).data('gridster');
-
-
-
-            //var gridster1 = $("#demo1").gridster({
-            //    widget_base_dimensions: [100, 100],
-            //    widget_margins: [3, 3],
-
-            //    helper: 'clone',
-            //    draggable: {
-            //        drag: function () {
-            //            savePanel();
-            //        },
-            //    },
-            //    resize: {
-            //        enabled: true,
-            //        resize: function () {
-            //            savePanel();
-            //        },
-            //    }
-            //}).data('gridster');
-
-            //gridsters.push(gridster);
-
-            //gridsters.push(gridster1);
-
             
-
             currentindex = Number($('#currendindex').data('id'));
             
             $('.js-resize-random').on('click', function () {
@@ -405,7 +377,7 @@
 
                 $('.nav-add').before(
                     "<li class='nav-item'> <a class='nav-link active' data-target='tab-" + counter+"' data-id='" + counter + "' href='#'>" + title+""+
-                    "<span class='ml-2 m-0 p-0' style='display:inline;float:right;'>" +
+                    "<span class='ml-2 m-0 p-0 btn-edit' style='display:inline;float:right;'>" +
                     " <i class='material-icons text-dark'>drag_indicator</i>" +
                     "</span>" +
                     " </a>" +
@@ -448,6 +420,15 @@
                 $('.nav-link').trigger('click');
 
             });
+
+
+            $('.btn-reset').on('click', function () {
+
+                localStorage.removeItem('positions');
+                location.reload();
+            });
+
+            bindPanelEdit();
 
         });
     </script>
