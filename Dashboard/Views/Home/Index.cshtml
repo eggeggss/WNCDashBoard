@@ -62,7 +62,11 @@
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link active" data-id="0" data-target="tab-0" href="#">Default
-                <span class="ml-2 m-0 p-0" style="display:inline;float:right;">
+                <span class="ml-2 m-0 p-0 btn-edit" 
+                      data-title="Default"
+                      data-group="ACC"
+                      style="display:inline;float:right;"
+                      data-toggle="modal" data-target="#EditModal">
                     <i class="material-icons text-dark">drag_indicator</i>
                 </span>
             </a>
@@ -70,7 +74,11 @@
         </li>
         <li class="nav-item ">
             <a class="nav-link" data-target="tab-1"  data-id="1" href="#">Customize
-                <span class="ml-2 m-0 p-0" style="display:inline;float:right;">
+                <span  class="ml-2 m-0 p-0 btn-edit" 
+                       data-title="Customize"
+                       data-group="MFG"
+                       data-toggle="modal" data-target="#EditModal"
+                      style="display:inline;float:right;">
                     <i class="material-icons text-dark">drag_indicator</i>
                 </span>
             </a>
@@ -110,7 +118,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add a New TabItem</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add A New Panel</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -118,13 +126,59 @@
             <div class="modal-body">
                 <div class="form-group">
                     <input type="text"  class="form-control" id="tabname" 
-                           aria-describedby="emailHelp" placeholder="Tab title">
-               
+                           aria-describedby="emailHelp" placeholder="Panel title">               
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">套用範本</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect2"  >
+                        <option selected>None</option>
+                        <option>MFG001</option>
+                        <option>ACC001</option>
+                    </select>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+               
                 <button type="button" class="btn btn-success btn-addtab">Save changes</button>
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade"
+     id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit This Panel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="tabname_edit"
+                           aria-describedby="emailHelp" placeholder="Panel title">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">共享範本到哪個群組</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                        <option selected>None</option>
+                        <option >Public</option>
+                        <option>MFG</option>
+                        <option>ACC</option>
+                        <option>DIS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+               
+                <button type="button" class="btn btn-success btn-edittab">Save changes</button>
+                <button type="button" class="btn btn-danger btn-deletetab">Delete This Panel</button>
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -149,10 +203,11 @@
         function bindPanelEdit() {
             $('.btn-edit').unbind();
             $('.btn-edit').on('click', function (e) {
-                //e.preventDefault();
-                //e.stoppropagation();
-                //$('.dropdown-toggle').dropdown();
-                //alert('test');
+               
+                var title = $(this).data("title");
+                
+                $('#tabname_edit').val(title);
+               
             });
         }
 
@@ -234,9 +289,9 @@
             var url = "@Url.Content("~/Home/GenReport/")" + id;
            
             $.get(url, function (e) {
-
+                $('*[data-id="' + id + '"]').html(e);
               
-                 $('#a' + newid).html(e);
+                 //$('#a' + newid).html(e);
              });
         }
 
@@ -375,9 +430,11 @@
 
                 var title=$('#tabname').val();
 
+               
+
                 $('.nav-add').before(
                     "<li class='nav-item'> <a class='nav-link active' data-target='tab-" + counter+"' data-id='" + counter + "' href='#'>" + title+""+
-                    "<span class='ml-2 m-0 p-0 btn-edit' style='display:inline;float:right;'>" +
+                    "<span class='ml-2 m-0 p-0 btn-edit' style='display:inline;float:right;' data-title='"+title+"'   data-toggle='modal' data-target='#EditModal'  >" +
                     " <i class='material-icons text-dark'>drag_indicator</i>" +
                     "</span>" +
                     " </a>" +
@@ -412,6 +469,9 @@
                 gridsters.push(gridsternew);
 
                 bindNavLink();
+
+               
+                bindPanelEdit();
 
                 $('#tabname').val('');
 

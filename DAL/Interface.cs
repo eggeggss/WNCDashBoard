@@ -41,7 +41,7 @@ namespace DAL
 
     public interface IItemRepository : IRepository<Item>
     {
-
+        int InsertReturnId(Item t);
     }
 
 

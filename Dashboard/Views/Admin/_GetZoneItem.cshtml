@@ -2,6 +2,7 @@
 @model Item
 @{
     List<SelectListItem> sizeList = (List<SelectListItem>)ViewBag.sizeList;
+    String GroupName = (String)ViewBag.GroupName;
 }
 @using (Html.BeginForm("UpdateZone", "Admin", FormMethod.Post, new { id = "myForm" }))
 {
@@ -15,6 +16,12 @@
     @Html.HiddenFor(m => m.stat_void)
     @Html.HiddenFor(m => m.x)
     @Html.HiddenFor(m => m.y)
+    <div class="form-group">
+        <label>Group</label>
+        <div>
+            <input class="form-control" disabled  value="@GroupName"/>
+        </div>
+    </div>
     <div class="form-group">
         <label>item name</label>
         @Html.TextBoxFor(m => m.item_name, new { @class = "form-control" })
@@ -34,6 +41,7 @@
         @Html.DropDownListFor(m => m.size, sizeList, new { @class = "form-control" })
 
     </div>
-    <button type="submit" class="btn btn-success btn-send w-50">Save</button>
+    <button type="submit" class="btn btn-success btn-send w-25">Save</button>
+    <a class="btn btn-danger btn-del-zone w-25" href="@Url.Content("~/Admin/DeleteItem")/@Model.id_item">Delete Zone</a>
 }
 

@@ -105,7 +105,6 @@ namespace DAL
             {
                 Func<bool> func = new Func<bool>(() =>
                 {
-
                     using (var db = new Dashboard1Entities())
                     {
 
@@ -120,6 +119,30 @@ namespace DAL
                 });
 
                 return _adapter.Catch<bool>(func);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"ItemRepositry GetAll fail:{ex.Message}");
+            }
+        }
+
+        public int InsertReturnId(Item t)
+        {
+            try
+            {
+                Func<int> func = new Func<int>(() =>
+                {
+                    using (var db = new Dashboard1Entities())
+                    {
+                        t.stat_void = 0;
+                        t.dt_create = DateTime.Now;
+                        db.Entry(t).State = System.Data.Entity.EntityState.Added;
+                        db.SaveChanges();
+                        return t.id_item;
+                    }
+                });
+
+                return _adapter.Catch<int>(func);
             }
             catch (Exception ex)
             {

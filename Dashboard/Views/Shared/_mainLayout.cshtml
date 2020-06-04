@@ -122,26 +122,30 @@
               </div>
               <li class="nav-itema ">
                 <div class="container-fluid">
-                    <div class="row justify-content-around">
+                    <div class="row justify-content-between">
                            @{ 
                                int count = 0;
                            }
                            @foreach (var child in item.items)
                            {
-                              { 
-                                  count++;
-                                  
-                                  if (count%3==0)
-                                  {
-                                      icon = "dashboard";
-                                  }else if (count % 3 == 1)
-                                  {
-                                      icon = "calendar_view_day";
-                                  }else
-                                  {
-                                      icon = "calendar_today";
-                                  }
-                              }
+                               if (child == null)
+                               {
+                                   continue;
+                               }
+                               {
+                                   count++;
+
+                                   if (count%3==0)
+                                   {
+                                       icon = "dashboard";
+                                   }else if (count % 3 == 1)
+                                   {
+                                       icon = "calendar_view_day";
+                                   }else
+                                   {
+                                       icon = "calendar_today";
+                                   }
+                               }
 
                             <div class="col-6 mt-2 mb-3 ml-0 pl-0 report-item draggable @item.groupname" 
                                  data-rpname=@child.item_name
