@@ -168,7 +168,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success btn-addtab">Save changes</button>
+                <button type="button" class="btn btn-success btn-edittab">Save changes</button>
             </div>
         </div>
     </div>
@@ -229,6 +229,16 @@
 
         var index = 0;
 
+
+        function bindSavePanel(){
+
+            $('.btn-edittab').unbind();
+            $('.btn-edittab').on('click', function () {
+
+                //
+            });
+        }
+
         function btnZoneDel() {
             
             $('.btn-del-zone').unbind();
@@ -272,7 +282,8 @@
             $('.btn-edit').unbind();
             $('.btn-edit').on('click', function (e) {
               
-                var title=$(this).data("title");
+                var title = $(this).data("title");
+                
                 var group = $(this).data("group");
 
                 $('#panelname').val(title);
@@ -375,7 +386,6 @@
 
             $('.web-content').each(function (idx, obj) {
                 var id = $(this).data('id');
-                //var id = $(this).attr('id');
                 loadSingleData(id);
             })
         }
@@ -385,7 +395,6 @@
             setTimeout(function () {
 
                 var data = $('.user-content').html();
-                //var data = $('.gridster ul').html();
                 localStorage.removeItem('positions_backend');
                 localStorage.setItem('positions_backend', data);
 
@@ -403,7 +412,6 @@
                 //localStorage.removeItem('positions_backend');
 
                 $('.user-content').html(pos);
-                //$('.gridster ul').html(pos);
             }
 
             var gridsteritem;
@@ -504,11 +512,11 @@
 
                 $('.nav-link').removeClass("active");
 
-                var title=$('#tabname').val();
-
+                var title = $('#panelname1').val();
+                
                 $('.nav-add').before(
                     "<li class='nav-item'> <a class='nav-link active' data-target='tab-" + counter+"' data-id='" + counter + "' href='#'>" + title+""+
-                    "<span class='ml-2 m-0 p-0 btn-edit' style='display:inline;float:right;'>" +
+                    "<span class='ml-2 m-0 p-0 btn-edit' style='display:inline;float:right;'  data-title='" + title +"'   data-toggle='modal' data-target='#EditPanelModal' >" +
                     " <i class='material-icons text-dark'>drag_indicator</i>" +
                     "</span>" +
                     " </a>" +
@@ -542,6 +550,8 @@
                 gridsters.push(gridsternew);
 
                 bindNavLink();
+                bindPanelEdit();
+                bindSavePanel();
 
                 $('#tabname').val('');
 
@@ -560,7 +570,7 @@
             bindPanelEdit();
             btnZoneEdit();
             btnZoneAdd();
-
+            bindSavePanel();
         });
     </script>
 

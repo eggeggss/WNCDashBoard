@@ -78,6 +78,10 @@ namespace Dashboard.Controllers
 
             var item=_dashboard.GetReportInfo(id_item);
 
+            if (item == null) {
+                return new HttpStatusCodeResult(404,"The Object is Not Found");
+            }
+
             return PartialView("_GenReport", item);
 
         }
