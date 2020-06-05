@@ -47,7 +47,8 @@
           <Property Name="dt_create" Type="datetime" />
           <Property Name="dt_update" Type="datetime" />
           <Property Name="stat_void" Type="int" />
-          <Property Name="htmltemplate" Type="nvarchar(max)" />
+          <Property Name="htmltemplateM" Type="nvarchar(max)" />
+          <Property Name="htmltemplateD" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -130,7 +131,8 @@
           <Property Name="dt_create" Type="DateTime" Precision="3" />
           <Property Name="dt_update" Type="DateTime" Precision="3" />
           <Property Name="stat_void" Type="Int32" />
-          <Property Name="htmltemplate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="htmltemplateM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="htmltemplateD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -164,7 +166,7 @@
           <EntitySet Name="Users" EntityType="Self.Users" />
           <EntitySet Name="UsersGroupsRel" EntityType="Self.UsersGroupsRel" />
           <FunctionImport Name="zp_get_not_exists_group" ReturnType="Collection(Database1Model.zp_get_not_exists_group_Result)">
-            <Parameter Name="empno" Mode="In" Type="String" />
+          <Parameter Name="empno" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="zp_get_not_exists_group_Result">
@@ -215,13 +217,14 @@
           <EntitySetMapping Name="TabTemplate">
             <EntityTypeMapping TypeName="Database1Model.TabTemplate">
               <MappingFragment StoreEntitySet="TabTemplate">
+                <ScalarProperty Name="htmltemplateD" ColumnName="htmltemplateD" />
+                <ScalarProperty Name="htmltemplateM" ColumnName="htmltemplateM" />
                 <ScalarProperty Name="id_tab" ColumnName="id_tab" />
                 <ScalarProperty Name="id_group" ColumnName="id_group" />
                 <ScalarProperty Name="tab_name" ColumnName="tab_name" />
                 <ScalarProperty Name="dt_create" ColumnName="dt_create" />
                 <ScalarProperty Name="dt_update" ColumnName="dt_update" />
                 <ScalarProperty Name="stat_void" ColumnName="stat_void" />
-                <ScalarProperty Name="htmltemplate" ColumnName="htmltemplate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

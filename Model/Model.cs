@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Class1
+    public class PostPanelObj
     {
+        public string groupname { get; set; }
+        public string panelname { set; get; }
+        public string htmlm { get; set; }
+        public string htmld { get; set; }
     }
 }

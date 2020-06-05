@@ -514,7 +514,8 @@ namespace DAL
                     {
 
 
-                        return db.TabTemplate.Where(e => e.stat_void == 0).FirstOrDefault();
+                        return db.TabTemplate.Where(e =>e.tab_name==name 
+                        &&  e.stat_void == 0).FirstOrDefault();
 
                     }
                 });

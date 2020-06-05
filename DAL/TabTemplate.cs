@@ -20,6 +20,7 @@ namespace DAL
         public Nullable<System.DateTime> dt_create { get; set; }
         public Nullable<System.DateTime> dt_update { get; set; }
         public Nullable<int> stat_void { get; set; }
-        public string htmltemplate { get; set; }
+        public string htmltemplateM { get; set; }
+        public string htmltemplateD { get; set; }
     }
 }

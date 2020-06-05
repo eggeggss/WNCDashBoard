@@ -42,7 +42,8 @@
     <Property Name="dt_create" Type="DateTime" Precision="3" />
     <Property Name="dt_update" Type="DateTime" Precision="3" />
     <Property Name="stat_void" Type="Int32" />
-    <Property Name="htmltemplate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="htmltemplateM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="htmltemplateD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Users">
     <Key>

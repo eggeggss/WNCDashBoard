@@ -1,4 +1,5 @@
 ﻿using DAL;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace BLL
         void InsertZone(Item item);
 
         void DeleteZone(Item item);
+
+        void SavePanel(PostPanelObj panelobj);
     }
 
     public class DashboardService : IDashboardService
@@ -29,13 +32,14 @@ namespace BLL
         private readonly IItemGroupRelRepository _itemgrouprel;
         private readonly IItemRepository _itemrepo;
         private readonly IExtentRepository _extent;
-
+        private readonly ITabTemplateRepository _itab;
         public DashboardService(
             IItemRepository item,
             IUsersRepository user,
             IUsersGroupRelRepository usergroup,
             IGroupRepository group,
             IItemGroupRelRepository itemrel,
+            ITabTemplateRepository itab,
             IExtentRepository extent)
         {
             _user = user;
@@ -43,6 +47,7 @@ namespace BLL
             _group = group;
             _itemgrouprel = itemrel;
             _itemrepo = item;
+            _itab = itab;
             _extent = extent;
         }
 
@@ -258,6 +263,31 @@ namespace BLL
         public void DeleteZone(Item item)
         {
             _itemrepo.Delete(item);
+        }
+
+        public void SavePanel(PostPanelObj panelobj)
+        {
+            var tabitem = _itab.GetAll().Where(e => e.tab_name == panelobj.panelname && e.stat_void == 0).FirstOrDefault();
+            var group=_group.GetAll().Where(e => e.group_name == panelobj.groupname && e.stat_void == 0).FirstOrDefault();
+            //存在就更新不存在就新增
+            if (tabitem == null)
+            {
+                _itab.Insert(new TabTemplate {
+                    dt_create=DateTime.Now,
+                    id_group=group.id_group,
+                    htmltemplateD=panelobj.htmld,
+                    htmltemplateM=panelobj.htmlm,
+                    tab_name=panelobj.panelname,
+                    stat_void=0
+                });
+            }else
+            {
+                tabitem.dt_update = DateTime.Now;
+                tabitem.htmltemplateD = panelobj.htmld;
+                tabitem.htmltemplateM = panelobj.htmlm;
+                tabitem.tab_name = panelobj.panelname;
+                _itab.Update(tabitem);
+            }
         }
     }
 

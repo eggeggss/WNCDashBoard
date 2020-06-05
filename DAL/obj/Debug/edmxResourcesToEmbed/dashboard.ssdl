@@ -42,7 +42,8 @@
     <Property Name="dt_create" Type="datetime" />
     <Property Name="dt_update" Type="datetime" />
     <Property Name="stat_void" Type="int" />
-    <Property Name="htmltemplate" Type="nvarchar(max)" />
+    <Property Name="htmltemplateM" Type="nvarchar(max)" />
+    <Property Name="htmltemplateD" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Users">
     <Key>

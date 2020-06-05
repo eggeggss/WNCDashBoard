@@ -120,8 +120,7 @@
                     <label>Group</label>
 
                     <select class="form-control" id="groupname1" name="groupname">
-                        <option selected>Public</option>
-                        <option>MFG</option>
+                        <option selected>MFG</option>
                         <option>ACC</option>
                     </select>
                    
@@ -158,8 +157,7 @@
                         <label>Group</label>
 
                         <select class="form-control"  id="groupname" name="groupname">
-                            <option selected>Public</option>
-                            <option>MFG</option>
+                            <option selected>MFG</option>
                             <option>ACC</option>
                         </select>
                      
@@ -168,7 +166,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success btn-edittab">Save changes</button>
+                <button type="button" data-demo-id="0" class="btn btn-success btn-edittab-save">Save changes</button>
             </div>
         </div>
     </div>
@@ -213,7 +211,7 @@
     </div>
 </div>
 
-@*<button class=" btn btn-success btn-Save">Save</button>*@
+
 @section scripts
 {
 
@@ -226,16 +224,60 @@
     <script>
         var gridsters = [];
         var currentindex = 0;
-
         var index = 0;
+
+        function HTMLEncode(str) {
+           
+            return $('<div/>').text(str).html();
+        }
+        
+
+        function HTMLDecode(str) {
+            return $('<div/>').html(str).text();
+        }
 
 
         function bindSavePanel(){
 
-            $('.btn-edittab').unbind();
-            $('.btn-edittab').on('click', function () {
+            $('.btn-edittab-save').unbind();
+            $('.btn-edittab-save').on('click', function () {
 
-                //
+                var groupname = $('#groupname').val();
+                var panelname = $('#panelname').val();
+
+                var demoid = $(this).data("demo-id");
+
+
+                var master = $.base64.btoa($('*[data-target="tab-' + demoid + '"]').parent('.nav-item').html());
+
+                var detail = $.base64.btoa($('#tab-' + demoid).html());
+
+                var data = {
+                    groupname: groupname,
+                    panelname: panelname,
+                    htmlm: master,
+                    htmld: detail,
+                }
+
+                var postdata = JSON.stringify(data);
+                var url = "@Url.Content("~/Admin/UpdateTabPanel")";
+
+                var response = $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    type: 'POST',
+                    url: url,
+                    data: postdata,
+                    success: function () {
+
+                        $('.btn-close').trigger('click');
+
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+
             });
         }
 
@@ -288,7 +330,13 @@
 
                 $('#panelname').val(title);
                 $('#groupname').val(group);
+
+                var demo_id=$(this).parent('.nav-link').data('id');
+                $('.btn-edittab-save').data("demo-id",demo_id);
+
+
             });
+
         }
 
         //Add Panel
@@ -356,7 +404,7 @@
                 '<div class="web-content" style="width:80%;float:left;" data-id="a' + id + '" id="a' + newid + '" ></div>' +
                 ' <div  class=" m-0 p-0 btn-edit-zone" '+
                       'data-toggle="modal" data-id="'+id+'" data-target="#EditZoneModal"'+
-                      ' style = "float:right;" >'+
+                      'style = "float:right;" >'+
                 '<i class="material-icons text-dark">drag_indicator</i>'+
                 '</div >'+
                 '</span></li >', x, y);
@@ -404,7 +452,11 @@
         }
 
         $(function () {
+
             $.ajaxSetup({ cache: false });
+
+            $.base64.utf8encode = true;
+
             var pos = localStorage.getItem('positions_backend');
 
             if (pos != null) {
@@ -438,9 +490,7 @@
                     }
                 }).data('gridster');
 
-
                 gridsters.push(gridsteritem);
-
 
             });
 
@@ -552,6 +602,7 @@
                 bindNavLink();
                 bindPanelEdit();
                 bindSavePanel();
+                
 
                 $('#tabname').val('');
 

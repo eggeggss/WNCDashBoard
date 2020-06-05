@@ -1,5 +1,6 @@
 ﻿using BLL;
 using DAL;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -130,5 +131,22 @@ namespace Dashboard.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        [Route("UpdateTabPanel")]
+        public ActionResult UpdateTabPanel([System.Web.Http.FromBody] PostPanelObj data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+
+            _dashboard.SavePanel(data);
+
+            //return RedirectToAction("Index");
+            return new HttpStatusCodeResult(200);
+        }
+
+
     }
+
 }

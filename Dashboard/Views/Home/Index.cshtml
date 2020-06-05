@@ -312,7 +312,6 @@
             if (pos != null) {
 
                 //localStorage.removeItem('positions');
-
                 $('.user-content').html(pos);
                 
             } 
@@ -416,8 +415,7 @@
                 $('.nav-link').removeClass("active");
 
                 var title = $('#tabname').val();
-                
-             
+                            
                 $('.nav-add').before(
                     "<li class='nav-item'> <a class='nav-link active' data-target='tab-" + counter+"' data-id='" + counter + "' href='#'>" + title+""+
                     "<span class='ml-2 m-0 p-0 btn-edit' style='display:inline;float:right;' data-title='"+title+"'   data-toggle='modal' data-target='#EditModal'  >" +

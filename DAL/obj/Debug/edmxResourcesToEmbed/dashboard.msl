@@ -39,13 +39,14 @@
     <EntitySetMapping Name="TabTemplate">
       <EntityTypeMapping TypeName="Database1Model.TabTemplate">
         <MappingFragment StoreEntitySet="TabTemplate">
+          <ScalarProperty Name="htmltemplateD" ColumnName="htmltemplateD" />
+          <ScalarProperty Name="htmltemplateM" ColumnName="htmltemplateM" />
           <ScalarProperty Name="id_tab" ColumnName="id_tab" />
           <ScalarProperty Name="id_group" ColumnName="id_group" />
           <ScalarProperty Name="tab_name" ColumnName="tab_name" />
           <ScalarProperty Name="dt_create" ColumnName="dt_create" />
           <ScalarProperty Name="dt_update" ColumnName="dt_update" />
           <ScalarProperty Name="stat_void" ColumnName="stat_void" />
-          <ScalarProperty Name="htmltemplate" ColumnName="htmltemplate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

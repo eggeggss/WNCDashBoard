@@ -8,3 +8,7 @@ X:\WNCDashBoard\Model\obj\Debug\Model.csprojAssemblyReference.cache
 X:\WNCDashBoard\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 X:\WNCDashBoard\Model\obj\Debug\Model.dll
 X:\WNCDashBoard\Model\obj\Debug\Model.pdb
+C:\Users\20000390\Documents\visual studio 2015\Projects\WNCDashBoard\Model\bin\Debug\Model.dll
+C:\Users\20000390\Documents\visual studio 2015\Projects\WNCDashBoard\Model\bin\Debug\Model.pdb
+C:\Users\20000390\Documents\visual studio 2015\Projects\WNCDashBoard\Model\obj\Debug\Model.dll
+C:\Users\20000390\Documents\visual studio 2015\Projects\WNCDashBoard\Model\obj\Debug\Model.pdb
